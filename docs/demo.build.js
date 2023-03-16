@@ -49089,6 +49089,7 @@ if ( typeof window !== 'undefined' ) {
 // Import play button alpha image
 
 
+
 // Create private member refrence to object
 let _this = undefined;
 
@@ -49098,15 +49099,15 @@ const _states = {
    UNINITIALIZED: 0,
    NOSOURCE: 1,
    LOADING: 2,
-   READY: 3 
+   READY: 3
 }
 
-// Create private class members 
+// Create private class members
 let _videoDOMElement, _playButtonObject, three_video_player_geometry, _material = undefined;
 
 // Define constructor method
 function THREEVideoPlayer(options = {}) {
-   // Initialize default geometry & material 
+   // Initialize default geometry & material
    three_video_player_geometry = new PlaneGeometry(1.0, 1.0);
    _material = new MeshBasicMaterial({ color: 0xffffff });
 
@@ -49119,6 +49120,7 @@ function THREEVideoPlayer(options = {}) {
    _videoDOMElement.setAttribute('preload', 'auto');
    _videoDOMElement.setAttribute('playsinline', 'playsinline');
    _videoDOMElement.setAttribute('webkit-playsinline', 'webkit-playsinline');
+   _videoDOMElement.setAttribute("crossorigin", "anonymous");
    _videoDOMElement.muted = options.muted ? options.muted : false;
    _videoDOMElement.autoplay = options.autoplay ? options.autoplay : false;
    _videoDOMElement.loop = options.loop ? options.loop : false;
@@ -49131,7 +49133,8 @@ function THREEVideoPlayer(options = {}) {
    _playButtonObject = new Mesh(new PlaneGeometry(0.6,0.6), new MeshBasicMaterial({
         color: options.play_btn_color ? options.play_btn_color : 0xC1C1C0,
         alphaMap: new TextureLoader().load(play_button_alpha),
-        alphaTest: 0.3
+        alphaTest: 0.3,
+        side: DoubleSide,
    }));
 
    // Add _playButtonObject as child of object
@@ -49189,16 +49192,16 @@ function _setSource(source) {
     var nSourceDOMElement = document.createElement('source');
     nSourceDOMElement.src = source;
     nSourceDOMElement.type = 'video/mp4';
-    _videoDOMElement.appendChild(nSourceDOMElement); 
+    _videoDOMElement.appendChild(nSourceDOMElement);
 
     // Set state to _states.READY when oncanplay is called
     _videoDOMElement.oncanplay = function() {
         _setState(_states.READY).then(function(){return;});
     }
-   
+
     // Set state to _states.LOADING and load new source
     _setState(_states.LOADING).then(function(){
-        _videoDOMElement.load(); 
+        _videoDOMElement.load();
     });
 }
 
@@ -49244,8 +49247,8 @@ async function _setState(nState) {
            _this.geometry = three_video_player_geometry;
            _this.material.map = new VideoTexture(_videoDOMElement);
            _this.material.map.needsUpdate = true;
-           _this.material.needsUpdate = true; 
-           _this.visible = true; 
+           _this.material.needsUpdate = true;
+           _this.visible = true;
            _playButtonObject.visible = true;
             break;
         default:
@@ -49269,7 +49272,7 @@ THREEVideoPlayer.prototype = Object.assign(Object.create(Mesh.prototype), {
         }
     },
     canPlay: function() {
-       return _state === _states.READY; 
+       return _state === _states.READY;
     },
     isPaused: function() {
         if(_videoDOMElement !== undefined){
@@ -49301,7 +49304,7 @@ THREEVideoPlayer.prototype = Object.assign(Object.create(Mesh.prototype), {
     setAutoplay: function(isAutoplay){
        if(_videoDOMElement !== undefined){
            _videoDOMElement.autoplay = new Boolean(isAutoplay);
-       } 
+       }
     },
     isAutoplay: function() {
         if(_videoDOMElement !== undefined){
@@ -49328,6 +49331,7 @@ THREEVideoPlayer.prototype = Object.assign(Object.create(Mesh.prototype), {
 
 // Export object
 
+
 ;// CONCATENATED MODULE: ./coffee.mp4
 /* harmony default export */ const coffee = (__webpack_require__.p + "dd127e780c537510737d02a5ec87c4d5.mp4");
 ;// CONCATENATED MODULE: ./demo.js
@@ -49347,18 +49351,19 @@ const scene3 = new Scene();
 const camera3 = new PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
 
 // Create & initialize THREE JS renderer
-const renderer3 = new WebGLRenderer();
+const renderer3 = new WebGLRenderer( { alpha: true } );
 renderer3.setSize(window.innerWidth, window.innerHeight);
-renderer3.setClearColor(0x676767, 1);
+// renderer3.xr.enabled = true;
+// renderer3.setClearColor(0x676767, 1);
 document.body.appendChild(renderer3.domElement);
 
 // Create groundPlaneObject and add to THREE JS scene
-const groundPlaneObject = new Mesh(new PlaneGeometry(1000, 2000), new MeshBasicMaterial({
-    color: 0x444444,
-    side: DoubleSide
-}));
-groundPlaneObject.rotation.x = -Math.PI/2.0;
-scene3.add(groundPlaneObject);
+// const groundPlaneObject = new THREE.Mesh(new THREE.PlaneBufferGeometry(1000, 2000), new THREE.MeshBasicMaterial({
+//     color: 0x444444,
+//     side: THREE.DoubleSide
+// }));
+// groundPlaneObject.rotation.x = -Math.PI/2.0;
+// scene3.add(groundPlaneObject);
 
 // Create videoPlayerObject and add to THREE JS scene
 const videoPlayerObject = new THREEVideoPlayer({
@@ -49402,30 +49407,15 @@ var dir = "right";
 const RotationSpeed = 0.002;
 const RotationMax = 0.4;
 
+// navigator.xr.requestSession('immersive-vr', { optionalFeatures: ['local-floor', 'bounded-floor'] }).then((session) => {
+//     renderer3.xr.setSession(session);
+// });
+
 // Define animation & rendering method
 function animate() {
     // Request next frame
     requestAnimationFrame(animate);
-
-    // Animate video player object
-    switch(dir){
-        case "right":
-            videoPlayerObject.rotation.y += RotationSpeed;
-
-            if(videoPlayerObject.rotation.y > RotationMax){
-                dir = "left";
-            }
-            break;
-        case "left":
-            videoPlayerObject.rotation.y -= RotationSpeed;
-
-            if(videoPlayerObject.rotation.y < -RotationMax){
-                dir = "right"
-            }
-            break;
-        default:
-            break;
-    }
+    // camera3.updateMatrixWorld();
 
     // Render frame
     renderer3.render(scene3, camera3);
@@ -49433,6 +49423,7 @@ function animate() {
 
 // Begin rendering
 animate();
+
 /******/ })()
 ;
 //# sourceMappingURL=demo.build.js.map
