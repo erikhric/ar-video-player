@@ -49246,6 +49246,7 @@ async function _setState(nState) {
            _this.geometry.dispose();
            _this.geometry = three_video_player_geometry;
            _this.material.map = new VideoTexture(_videoDOMElement);
+           // _this.material.alphaMap = new THREE.VideoTexture(_videoDOMElement);
            _this.material.map.needsUpdate = true;
            _this.material.needsUpdate = true;
            _this.visible = true;
@@ -49349,7 +49350,7 @@ const scene3 = new Scene();
 
 // Create THREE JS camera
 const camera3 = new PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-
+camera3.position.z = 2;
 // Create & initialize THREE JS renderer
 const renderer3 = new WebGLRenderer( { alpha: true } );
 renderer3.setSize(window.innerWidth, window.innerHeight);
@@ -49367,16 +49368,20 @@ document.body.appendChild(renderer3.domElement);
 
 // Create videoPlayerObject and add to THREE JS scene
 const videoPlayerObject = new THREEVideoPlayer({
-    source: coffee,
+    source: "https://cdn.glitch.com/f702252a-b636-466f-bffb-ccb9405c2c77%2F4k_6.mp4",//CoffeeVideo,
     play_btn_color: 0x6EABDD
 });
-videoPlayerObject.position.y = 0.5;
+// videoPlayerObject.position.y = 0.5;
 scene3.add(videoPlayerObject);
+const g = new BoxGeometry( 1, 1, 1 );
+const material = new MeshBasicMaterial( {color: 0x00ff00} );
+const cube = new Mesh( g, material );
+// scene3.add(cube);
 
 // Set camera position & look at videoPlayerObject
-camera3.position.z = 2.0;
-camera3.position.y = 0.6;
-camera3.lookAt(videoPlayerObject.position);
+// camera3.position.z = 2.0;
+// camera3.position.y = 0.6;
+// camera3.lookAt(videoPlayerObject.position);
 
 // Add "click" event listener to trigger video play / pause
 renderer3.domElement.addEventListener('mousedown', function(event){
@@ -49407,22 +49412,26 @@ var dir = "right";
 const RotationSpeed = 0.002;
 const RotationMax = 0.4;
 
-// navigator.xr.requestSession('immersive-vr', { optionalFeatures: ['local-floor', 'bounded-floor'] }).then((session) => {
-//     renderer3.xr.setSession(session);
-// });
+navigator.xr.requestSession('immersive-ar', { optionalFeatures: ['local-floor'] }).then((session) => {
+    renderer3.xr.setSession(session);
+    session.requestReferenceSpace('local-floor').then(function(referenceSpace) {
+        // start rendering
+        renderer3.setAnimationLoop(animate);
+    });
+});
 
 // Define animation & rendering method
 function animate() {
     // Request next frame
     requestAnimationFrame(animate);
-    // camera3.updateMatrixWorld();
+    camera3.updateMatrixWorld();
 
     // Render frame
     renderer3.render(scene3, camera3);
 }
 
 // Begin rendering
-animate();
+// animate();
 
 /******/ })()
 ;
