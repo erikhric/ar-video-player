@@ -49246,7 +49246,7 @@ async function _setState(nState) {
            _this.geometry.dispose();
            _this.geometry = three_video_player_geometry;
            _this.material.map = new VideoTexture(_videoDOMElement);
-           // _this.material.alphaMap = new THREE.VideoTexture(_videoDOMElement);
+           _this.material.alphaMap = new VideoTexture(_videoDOMElement);
            _this.material.map.needsUpdate = true;
            _this.material.needsUpdate = true;
            _this.visible = true;
