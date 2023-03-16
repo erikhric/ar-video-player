@@ -49368,7 +49368,7 @@ document.body.appendChild(renderer3.domElement);
 
 // Create videoPlayerObject and add to THREE JS scene
 const videoPlayerObject = new THREEVideoPlayer({
-    source: "https://cdn.glitch.com/f702252a-b636-466f-bffb-ccb9405c2c77%2F4k_6.mp4",//CoffeeVideo,
+    source: coffee,
     play_btn_color: 0x6EABDD
 });
 // videoPlayerObject.position.y = 0.5;
@@ -49411,10 +49411,11 @@ renderer3.domElement.addEventListener('mousedown', function(event){
 var dir = "right";
 const RotationSpeed = 0.002;
 const RotationMax = 0.4;
-
+var xrReferenceSpace;
 navigator.xr.requestSession('immersive-ar', { optionalFeatures: ['local-floor'] }).then((session) => {
     renderer3.xr.setSession(session);
     session.requestReferenceSpace('local-floor').then(function(referenceSpace) {
+        xrReferenceSpace = referenceSpace;
         // start rendering
         renderer3.setAnimationLoop(animate);
     });
@@ -49423,11 +49424,11 @@ navigator.xr.requestSession('immersive-ar', { optionalFeatures: ['local-floor'] 
 // Define animation & rendering method
 function animate() {
     // Request next frame
-    requestAnimationFrame(animate);
     camera3.updateMatrixWorld();
 
     // Render frame
     renderer3.render(scene3, camera3);
+    requestAnimationFrame(animate);
 }
 
 // Begin rendering
