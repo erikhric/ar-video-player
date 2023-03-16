@@ -49350,11 +49350,11 @@ const scene3 = new Scene();
 
 // Create THREE JS camera
 const camera3 = new PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-camera3.position.z = 2;
+camera3.position.z = -1;
 // Create & initialize THREE JS renderer
 const renderer3 = new WebGLRenderer( { alpha: true } );
 renderer3.setSize(window.innerWidth, window.innerHeight);
-// renderer3.xr.enabled = true;
+renderer3.xr.enabled = true;
 // renderer3.setClearColor(0x676767, 1);
 document.body.appendChild(renderer3.domElement);
 
