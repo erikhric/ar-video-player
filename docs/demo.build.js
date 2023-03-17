@@ -49131,8 +49131,8 @@ function THREEVideoPlayer(options = {}) {
 
    // Initialize play button object
    _playButtonObject = new Mesh(new PlaneGeometry(0.6,0.6), new MeshBasicMaterial({
-        color: options.play_btn_color ? options.play_btn_color : 0xC1C1C0,
-        alphaMap: new TextureLoader().load(play_button_alpha),
+        // color: options.play_btn_color ? options.play_btn_color : 0xC1C1C0,
+        map: new TextureLoader().load(play_button_alpha),
         // alphaTest: 0.3,
         // side: DoubleSide,
    }));
@@ -49370,7 +49370,9 @@ document.body.appendChild(renderer3.domElement);
 const videoPlayerObject = new THREEVideoPlayer({
     source: amelie,
     // source: "https://cdn.glitch.com/f702252a-b636-466f-bffb-ccb9405c2c77%2F4k_6.mp4",
-    play_btn_color: 0x6EABDD
+    play_btn_color: 0x6EABDD,
+    loop: true,
+    autoplay: true,
 });
 // videoPlayerObject.position.y = 0.5;
 
