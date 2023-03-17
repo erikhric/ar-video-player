@@ -49133,8 +49133,8 @@ function THREEVideoPlayer(options = {}) {
    _playButtonObject = new Mesh(new PlaneGeometry(0.6,0.6), new MeshBasicMaterial({
         color: options.play_btn_color ? options.play_btn_color : 0xC1C1C0,
         alphaMap: new TextureLoader().load(play_button_alpha),
-        alphaTest: 0.3,
-        side: DoubleSide,
+        // alphaTest: 0.3,
+        // side: DoubleSide,
    }));
 
    // Add _playButtonObject as child of object
@@ -49246,7 +49246,7 @@ async function _setState(nState) {
            _this.geometry.dispose();
            _this.geometry = three_video_player_geometry;
            _this.material.map = new VideoTexture(_videoDOMElement);
-           _this.material.alphaMap = new VideoTexture(_videoDOMElement);
+           // _this.material.alphaMap = new THREE.VideoTexture(_videoDOMElement);
            _this.material.map.needsUpdate = true;
            _this.material.needsUpdate = true;
            _this.visible = true;
