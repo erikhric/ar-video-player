@@ -49333,8 +49333,8 @@ THREEVideoPlayer.prototype = Object.assign(Object.create(Mesh.prototype), {
 // Export object
 
 
-;// CONCATENATED MODULE: ./coffee.mp4
-/* harmony default export */ const coffee = (__webpack_require__.p + "dd127e780c537510737d02a5ec87c4d5.mp4");
+;// CONCATENATED MODULE: ./amelie.mp4
+/* harmony default export */ const amelie = (__webpack_require__.p + "11490bcd1d2fa93062e223d0ace00d4f.mp4");
 ;// CONCATENATED MODULE: ./demo.js
 // Import JS libraries
 
@@ -49350,7 +49350,7 @@ const scene3 = new Scene();
 
 // Create THREE JS camera
 const camera3 = new PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-camera3.position.z = -1;
+// camera3.position.z = -1;
 // Create & initialize THREE JS renderer
 const renderer3 = new WebGLRenderer( { alpha: true } );
 renderer3.setSize(window.innerWidth, window.innerHeight);
@@ -49368,16 +49368,18 @@ document.body.appendChild(renderer3.domElement);
 
 // Create videoPlayerObject and add to THREE JS scene
 const videoPlayerObject = new THREEVideoPlayer({
-    source: coffee,
+    source: amelie,
+    // source: "https://cdn.glitch.com/f702252a-b636-466f-bffb-ccb9405c2c77%2F4k_6.mp4",
     play_btn_color: 0x6EABDD
 });
 // videoPlayerObject.position.y = 0.5;
-scene3.add(videoPlayerObject);
+
+// scene3.add(videoPlayerObject);
 const g = new BoxGeometry( 1, 1, 1 );
 const material = new MeshBasicMaterial( {color: 0x00ff00} );
 const cube = new Mesh( g, material );
 // scene3.add(cube);
-
+// cube.position.x += 1;
 // Set camera position & look at videoPlayerObject
 // camera3.position.z = 2.0;
 // camera3.position.y = 0.6;
@@ -49412,12 +49414,15 @@ var dir = "right";
 const RotationSpeed = 0.002;
 const RotationMax = 0.4;
 var xrReferenceSpace;
-navigator.xr.requestSession('immersive-ar', { optionalFeatures: ['local-floor'] }).then((session) => {
+navigator.xr.requestSession('immersive-ar', { optionalFeatures: ['local-floor', 'hit-test'] }).then((session) => {
     renderer3.xr.setSession(session);
     session.requestReferenceSpace('local-floor').then(function(referenceSpace) {
         xrReferenceSpace = referenceSpace;
         // start rendering
         renderer3.setAnimationLoop(animate);
+        scene3.add(videoPlayerObject);
+        videoPlayerObject.translateY(1);
+        videoPlayerObject.translateZ(-2);
     });
 });
 
