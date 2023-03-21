@@ -49257,6 +49257,7 @@ function _clearSource() {
         _setState(_states.NOSOURCE).then(function(){
             while(_videoDOMElement.firstChild) {
                 _videoDOMElement.removeChild(_videoDOMElement.firstChild);
+                _maskVideoDOMElement.removeChild(_maskVideoDOMElement.firstChild);
             }
         });
     }
@@ -49281,6 +49282,7 @@ async function _setState(nState) {
     switch(_state){
         case _states.NOSOURCE:
             _this.material.map = null;
+            _this.material.alphaMap = null;
             _this.material.needsUpdate = true;
             _this.visible = true;
             _playButtonObject.visible = false;
@@ -49294,6 +49296,7 @@ async function _setState(nState) {
            _this.material.map = new VideoTexture(_videoDOMElement);
            _this.material.alphaMap = new VideoTexture(_maskVideoDOMElement);
            _this.material.map.needsUpdate = true;
+            _this.material.alphaMap.needsUpdate = true;
            _this.material.needsUpdate = true;
            _this.visible = true;
            _playButtonObject.visible = true;
