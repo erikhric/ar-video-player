@@ -49407,9 +49407,10 @@ const scene3 = new Scene();
 const camera3 = new PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
 // camera3.position.z = -1;
 // Create & initialize THREE JS renderer
-const renderer3 = new WebGLRenderer( { alpha: true } );
+const renderer3 = new WebGLRenderer( { alpha: true, precision: "lowp", powerPreference: "high-performance" } );
 renderer3.setSize(window.innerWidth, window.innerHeight);
 renderer3.xr.enabled = true;
+renderer3.debug.checkShaderErrors = false;
 // renderer3.setClearColor(0x676767, 1);
 document.body.appendChild(renderer3.domElement);
 
@@ -49472,11 +49473,13 @@ var dir = "right";
 const RotationSpeed = 0.002;
 const RotationMax = 0.4;
 var xrReferenceSpace;
-navigator.xr.requestSession('immersive-ar', { optionalFeatures: ['local-floor', 'hit-test'] }).then((session) => {
+//'hit-test'
+navigator.xr.requestSession('immersive-ar', { optionalFeatures: ['local-floor'] }).then((session) => {
 // navigator.xr.requestSession('immersive-vr', { optionalFeatures: ['local-floor'] }).then((session) => {
     renderer3.xr.setSession(session);
+    renderer3.xr.setFramebufferScaleFactor(0.5);
     session.requestReferenceSpace('local-floor').then(function(referenceSpace) {
-        xrReferenceSpace = referenceSpace;
+    //     xrReferenceSpace = referenceSpace;
         // start rendering
         renderer3.setAnimationLoop(animate);
         scene3.add(videoPlayerObject);
