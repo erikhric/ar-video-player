@@ -49089,7 +49089,6 @@ if ( typeof window !== 'undefined' ) {
 // Import play button alpha image
 
 
-
 // Create private member refrence to object
 let _this = undefined;
 
@@ -49103,7 +49102,7 @@ const _states = {
 }
 
 // Create private class members
-let _videoDOMElement, _playButtonObject, three_video_player_geometry, _material = undefined;
+let _videoDOMElement,_maskVideoDOMElement, _playButtonObject, three_video_player_geometry, _material = undefined;
 
 // Define constructor method
 function THREEVideoPlayer(options = {}) {
@@ -49124,6 +49123,18 @@ function THREEVideoPlayer(options = {}) {
    _videoDOMElement.muted = options.muted ? options.muted : false;
    _videoDOMElement.autoplay = options.autoplay ? options.autoplay : false;
    _videoDOMElement.loop = options.loop ? options.loop : false;
+
+
+    _maskVideoDOMElement = document.createElement('video');
+    _maskVideoDOMElement.setAttribute('style', 'display:none;');
+    _maskVideoDOMElement.setAttribute('preload', 'auto');
+    _maskVideoDOMElement.setAttribute('playsinline', 'playsinline');
+    _maskVideoDOMElement.setAttribute('webkit-playsinline', 'webkit-playsinline');
+    _maskVideoDOMElement.setAttribute("crossorigin", "anonymous");
+    _maskVideoDOMElement.muted = options.muted ? options.muted : false;
+    _maskVideoDOMElement.autoplay = options.autoplay ? options.autoplay : false;
+    _maskVideoDOMElement.loop = options.loop ? options.loop : false;
+
    if(options.volume){
        _setVolume(options.volume);
    }
@@ -49164,6 +49175,7 @@ function THREEVideoPlayer(options = {}) {
         if(options.source){
             try{
                 _setSource(options.source);
+                _setSourceMask(options.mask);
             } catch (e) {
                 console.log(e)
             }
@@ -49202,6 +49214,39 @@ function _setSource(source) {
     // Set state to _states.LOADING and load new source
     _setState(_states.LOADING).then(function(){
         _videoDOMElement.load();
+    });
+}
+
+function _setSourceMask(source) {
+    // Return if uninitialized
+    if(_state === _states.UNINITIALIZED){
+        return;
+    }
+
+    // Check for valid method call
+    if(typeof source !== "string"){
+        throw "New source must be a string!";
+    }
+
+    // Remove any existing sources
+    // while(_videoDOMElement.firstChild) {
+    //     _videoDOMElement.removeChild(_videoDOMElement.firstChild);
+    // }
+
+    // Create new source DOM element
+    var nSourceDOMElement = document.createElement('source');
+    nSourceDOMElement.src = source;
+    nSourceDOMElement.type = 'video/mp4';
+    _maskVideoDOMElement.appendChild(nSourceDOMElement);
+
+    // Set state to _states.READY when oncanplay is called
+    _maskVideoDOMElement.oncanplay = function() {
+        // _setState(_states.READY).then(function(){return;});
+    }
+
+    // Set state to _states.LOADING and load new source
+    _setState(_states.LOADING).then(function(){
+        _maskVideoDOMElement.load();
     });
 }
 
@@ -49246,7 +49291,7 @@ async function _setState(nState) {
            _this.geometry.dispose();
            _this.geometry = three_video_player_geometry;
            _this.material.map = new VideoTexture(_videoDOMElement);
-           // _this.material.alphaMap = new THREE.VideoTexture(_videoDOMElement);
+           _this.material.alphaMap = new VideoTexture(_maskVideoDOMElement);
            _this.material.map.needsUpdate = true;
            _this.material.needsUpdate = true;
            _this.visible = true;
@@ -49335,6 +49380,8 @@ THREEVideoPlayer.prototype = Object.assign(Object.create(Mesh.prototype), {
 
 ;// CONCATENATED MODULE: ./amelie.mp4
 /* harmony default export */ const amelie = (__webpack_require__.p + "11490bcd1d2fa93062e223d0ace00d4f.mp4");
+;// CONCATENATED MODULE: ./amelie_mask.mp4
+/* harmony default export */ const amelie_mask = (__webpack_require__.p + "6cdfa796004b594605e6ac4cfd12c666.mp4");
 ;// CONCATENATED MODULE: ./demo.js
 // Import JS libraries
 
@@ -49343,6 +49390,7 @@ THREEVideoPlayer.prototype = Object.assign(Object.create(Mesh.prototype), {
 
 
 // Import coffee video
+
 
 
 // Create THREE JS scene
@@ -49369,6 +49417,7 @@ document.body.appendChild(renderer3.domElement);
 // Create videoPlayerObject and add to THREE JS scene
 const videoPlayerObject = new THREEVideoPlayer({
     source: amelie,
+    mask: amelie_mask,
     // source: "https://cdn.glitch.com/f702252a-b636-466f-bffb-ccb9405c2c77%2F4k_6.mp4",
     play_btn_color: 0x6EABDD,
     loop: true,
@@ -49416,7 +49465,8 @@ var dir = "right";
 const RotationSpeed = 0.002;
 const RotationMax = 0.4;
 var xrReferenceSpace;
-navigator.xr.requestSession('immersive-ar', { optionalFeatures: ['local-floor', 'hit-test'] }).then((session) => {
+// navigator.xr.requestSession('immersive-ar', { optionalFeatures: ['local-floor', 'hit-test'] }).then((session) => {
+navigator.xr.requestSession('immersive-vr', { optionalFeatures: ['local-floor'] }).then((session) => {
     renderer3.xr.setSession(session);
     session.requestReferenceSpace('local-floor').then(function(referenceSpace) {
         xrReferenceSpace = referenceSpace;
