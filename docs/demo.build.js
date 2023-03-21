@@ -49293,6 +49293,7 @@ async function _setState(nState) {
            three_video_player_geometry = new PlaneGeometry(_videoDOMElement.videoWidth/_videoDOMElement.videoHeight, 1.0);
            _this.geometry.dispose();
            _this.geometry = three_video_player_geometry;
+           _this.material.transparent = true;
            _this.material.map = new VideoTexture(_videoDOMElement);
            _this.material.alphaMap = new VideoTexture(_maskVideoDOMElement);
            _this.material.map.needsUpdate = true;
