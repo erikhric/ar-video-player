@@ -49465,8 +49465,8 @@ var dir = "right";
 const RotationSpeed = 0.002;
 const RotationMax = 0.4;
 var xrReferenceSpace;
-// navigator.xr.requestSession('immersive-ar', { optionalFeatures: ['local-floor', 'hit-test'] }).then((session) => {
-navigator.xr.requestSession('immersive-vr', { optionalFeatures: ['local-floor'] }).then((session) => {
+navigator.xr.requestSession('immersive-ar', { optionalFeatures: ['local-floor', 'hit-test'] }).then((session) => {
+// navigator.xr.requestSession('immersive-vr', { optionalFeatures: ['local-floor'] }).then((session) => {
     renderer3.xr.setSession(session);
     session.requestReferenceSpace('local-floor').then(function(referenceSpace) {
         xrReferenceSpace = referenceSpace;
