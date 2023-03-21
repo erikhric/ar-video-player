@@ -49299,6 +49299,7 @@ async function _setState(nState) {
            _this.material.map.needsUpdate = true;
             _this.material.alphaMap.needsUpdate = true;
             _this.material.precision = "lowp";
+            _this.material.forceSinglePass = false;
            _this.material.needsUpdate = true;
            _this.visible = true;
            _playButtonObject.visible = true;
