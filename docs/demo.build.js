@@ -49131,7 +49131,7 @@ function THREEVideoPlayer(options = {}) {
     _maskVideoDOMElement.setAttribute('playsinline', 'playsinline');
     _maskVideoDOMElement.setAttribute('webkit-playsinline', 'webkit-playsinline');
     _maskVideoDOMElement.setAttribute("crossorigin", "anonymous");
-    _maskVideoDOMElement.muted = options.muted ? options.muted : false;
+    _maskVideoDOMElement.muted = true;
     _maskVideoDOMElement.autoplay = options.autoplay ? options.autoplay : false;
     _maskVideoDOMElement.loop = options.loop ? options.loop : false;
 
@@ -49139,6 +49139,7 @@ function THREEVideoPlayer(options = {}) {
        _setVolume(options.volume);
    }
    document.body.appendChild(_videoDOMElement);
+   document.body.appendChild(_maskVideoDOMElement);
 
    // Initialize play button object
    _playButtonObject = new Mesh(new PlaneGeometry(0.6,0.6), new MeshBasicMaterial({
@@ -49229,9 +49230,9 @@ function _setSourceMask(source) {
     }
 
     // Remove any existing sources
-    // while(_videoDOMElement.firstChild) {
-    //     _videoDOMElement.removeChild(_videoDOMElement.firstChild);
-    // }
+    while(_maskVideoDOMElement.firstChild) {
+        _maskVideoDOMElement.removeChild(_videoDOMElement.firstChild);
+    }
 
     // Create new source DOM element
     var nSourceDOMElement = document.createElement('source');
