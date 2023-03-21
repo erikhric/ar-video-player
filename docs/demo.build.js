@@ -49204,7 +49204,7 @@ function _setSource(source) {
     // Create new source DOM element
     var nSourceDOMElement = document.createElement('source');
     nSourceDOMElement.src = source;
-    nSourceDOMElement.type = 'video/mp4';
+    // nSourceDOMElement.type = 'video/mp4';
     _videoDOMElement.appendChild(nSourceDOMElement);
 
     // Set state to _states.READY when oncanplay is called
@@ -49237,7 +49237,7 @@ function _setSourceMask(source) {
     // Create new source DOM element
     var nSourceDOMElement = document.createElement('source');
     nSourceDOMElement.src = source;
-    nSourceDOMElement.type = 'video/mp4';
+    // nSourceDOMElement.type = 'video/mp4';
     _maskVideoDOMElement.appendChild(nSourceDOMElement);
 
     // Set state to _states.READY when oncanplay is called
@@ -49386,9 +49386,9 @@ THREEVideoPlayer.prototype = Object.assign(Object.create(Mesh.prototype), {
 
 
 ;// CONCATENATED MODULE: ./amelie.mp4
-/* harmony default export */ const amelie = (__webpack_require__.p + "9f80a5ae459eb05e33750e55b9a47d8a.mp4");
+/* harmony default export */ const amelie = (__webpack_require__.p + "947898e3237ebc4a755024c188c81ebb.mp4");
 ;// CONCATENATED MODULE: ./amelie_mask.mp4
-/* harmony default export */ const amelie_mask = (__webpack_require__.p + "9cd0a514a7ca50aeea01c88c504ab806.mp4");
+/* harmony default export */ const amelie_mask = (__webpack_require__.p + "b86a42c8c6a4ff54656247129323dc1c.mp4");
 ;// CONCATENATED MODULE: ./demo.js
 // Import JS libraries
 
