@@ -49298,6 +49298,7 @@ async function _setState(nState) {
            _this.material.alphaMap = new VideoTexture(_maskVideoDOMElement);
            _this.material.map.needsUpdate = true;
             _this.material.alphaMap.needsUpdate = true;
+            _this.material.precision = "lowp";
            _this.material.needsUpdate = true;
            _this.visible = true;
            _playButtonObject.visible = true;
@@ -49384,9 +49385,9 @@ THREEVideoPlayer.prototype = Object.assign(Object.create(Mesh.prototype), {
 
 
 ;// CONCATENATED MODULE: ./amelie.mp4
-/* harmony default export */ const amelie = (__webpack_require__.p + "11490bcd1d2fa93062e223d0ace00d4f.mp4");
+/* harmony default export */ const amelie = (__webpack_require__.p + "9f80a5ae459eb05e33750e55b9a47d8a.mp4");
 ;// CONCATENATED MODULE: ./amelie_mask.mp4
-/* harmony default export */ const amelie_mask = (__webpack_require__.p + "6cdfa796004b594605e6ac4cfd12c666.mp4");
+/* harmony default export */ const amelie_mask = (__webpack_require__.p + "9cd0a514a7ca50aeea01c88c504ab806.mp4");
 ;// CONCATENATED MODULE: ./demo.js
 // Import JS libraries
 
@@ -49470,8 +49471,8 @@ var dir = "right";
 const RotationSpeed = 0.002;
 const RotationMax = 0.4;
 var xrReferenceSpace;
-navigator.xr.requestSession('immersive-ar', { optionalFeatures: ['local-floor', 'hit-test'] }).then((session) => {
-// navigator.xr.requestSession('immersive-vr', { optionalFeatures: ['local-floor'] }).then((session) => {
+// navigator.xr.requestSession('immersive-ar', { optionalFeatures: ['local-floor', 'hit-test'] }).then((session) => {
+navigator.xr.requestSession('immersive-vr', { optionalFeatures: ['local-floor'] }).then((session) => {
     renderer3.xr.setSession(session);
     session.requestReferenceSpace('local-floor').then(function(referenceSpace) {
         xrReferenceSpace = referenceSpace;
