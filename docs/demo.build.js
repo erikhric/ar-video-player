@@ -49592,10 +49592,10 @@ THREEVideoPlayer.prototype = Object.assign(Object.create(Mesh.prototype), {
 // Export object
 
 
-;// CONCATENATED MODULE: ./output.mp4
-/* harmony default export */ const output = (__webpack_require__.p + "d1db9bc38e65ed6aabc6687bd046393f.mp4");
-;// CONCATENATED MODULE: ./mask_output.mp4
-/* harmony default export */ const mask_output = (__webpack_require__.p + "c8c02ae47e75685cbbebe1cceca96beb.mp4");
+;// CONCATENATED MODULE: ./amelie.mp4
+/* harmony default export */ const amelie = (__webpack_require__.p + "947898e3237ebc4a755024c188c81ebb.mp4");
+;// CONCATENATED MODULE: ./amelie_mask.mp4
+/* harmony default export */ const amelie_mask = (__webpack_require__.p + "b86a42c8c6a4ff54656247129323dc1c.mp4");
 ;// CONCATENATED MODULE: ./demo.js
 // Import JS libraries
 
@@ -49631,8 +49631,8 @@ document.body.appendChild(renderer3.domElement);
 
 // Create videoPlayerObject and add to THREE JS scene
 const videoPlayerObject = new THREEVideoPlayer({
-    source: output,
-    mask: mask_output,
+    source: amelie,
+    mask: amelie_mask,
     // source: "https://cdn.glitch.com/f702252a-b636-466f-bffb-ccb9405c2c77%2F4k_6.mp4",
     play_btn_color: 0x6EABDD,
     loop: true,
@@ -49679,6 +49679,10 @@ renderer3.domElement.addEventListener('mousedown', function(event){
 navigator.xr.requestSession('immersive-ar', { optionalFeatures: ['local-floor'] }).then((session) => {
 // navigator.xr.requestSession('immersive-vr', { optionalFeatures: ['local-floor'] }).then((session) => {
     renderer3.xr.setSession(session);
+    session.updateRenderState({
+        depthNear: 1.0,
+        depthFar: 10.0,
+    });
     renderer3.xr.setFramebufferScaleFactor(0.5);
     session.requestReferenceSpace('local-floor').then(function(referenceSpace) {
     //     xrReferenceSpace = referenceSpace;
