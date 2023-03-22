@@ -49082,11 +49082,215 @@ if ( typeof window !== 'undefined' ) {
 
 ;// CONCATENATED MODULE: ./source/play_button_alpha.jpg
 /* harmony default export */ const play_button_alpha = (__webpack_require__.p + "12c9cda5c180f60f11d401c978bd0bdd.jpg");
+;// CONCATENATED MODULE: ./node_modules/three/src/constants.js
+const constants_REVISION = '125';
+const constants_MOUSE = { LEFT: 0, MIDDLE: 1, RIGHT: 2, ROTATE: 0, DOLLY: 1, PAN: 2 };
+const constants_TOUCH = { ROTATE: 0, PAN: 1, DOLLY_PAN: 2, DOLLY_ROTATE: 3 };
+const constants_CullFaceNone = 0;
+const constants_CullFaceBack = 1;
+const constants_CullFaceFront = 2;
+const constants_CullFaceFrontBack = 3;
+const constants_BasicShadowMap = 0;
+const constants_PCFShadowMap = 1;
+const constants_PCFSoftShadowMap = 2;
+const constants_VSMShadowMap = 3;
+const constants_FrontSide = 0;
+const constants_BackSide = 1;
+const constants_DoubleSide = 2;
+const constants_FlatShading = 1;
+const constants_SmoothShading = 2;
+const constants_NoBlending = 0;
+const constants_NormalBlending = 1;
+const constants_AdditiveBlending = 2;
+const constants_SubtractiveBlending = 3;
+const constants_MultiplyBlending = 4;
+const constants_CustomBlending = 5;
+const constants_AddEquation = 100;
+const constants_SubtractEquation = 101;
+const constants_ReverseSubtractEquation = 102;
+const constants_MinEquation = 103;
+const constants_MaxEquation = 104;
+const constants_ZeroFactor = 200;
+const constants_OneFactor = 201;
+const constants_SrcColorFactor = 202;
+const constants_OneMinusSrcColorFactor = 203;
+const constants_SrcAlphaFactor = 204;
+const constants_OneMinusSrcAlphaFactor = 205;
+const constants_DstAlphaFactor = 206;
+const constants_OneMinusDstAlphaFactor = 207;
+const constants_DstColorFactor = 208;
+const constants_OneMinusDstColorFactor = 209;
+const constants_SrcAlphaSaturateFactor = 210;
+const constants_NeverDepth = 0;
+const constants_AlwaysDepth = 1;
+const constants_LessDepth = 2;
+const constants_LessEqualDepth = 3;
+const constants_EqualDepth = 4;
+const constants_GreaterEqualDepth = 5;
+const constants_GreaterDepth = 6;
+const constants_NotEqualDepth = 7;
+const constants_MultiplyOperation = 0;
+const constants_MixOperation = 1;
+const constants_AddOperation = 2;
+const constants_NoToneMapping = 0;
+const constants_LinearToneMapping = 1;
+const constants_ReinhardToneMapping = 2;
+const constants_CineonToneMapping = 3;
+const constants_ACESFilmicToneMapping = 4;
+const constants_CustomToneMapping = 5;
+
+const constants_UVMapping = 300;
+const constants_CubeReflectionMapping = 301;
+const constants_CubeRefractionMapping = 302;
+const constants_EquirectangularReflectionMapping = 303;
+const constants_EquirectangularRefractionMapping = 304;
+const constants_CubeUVReflectionMapping = 306;
+const constants_CubeUVRefractionMapping = 307;
+const constants_RepeatWrapping = 1000;
+const constants_ClampToEdgeWrapping = 1001;
+const constants_MirroredRepeatWrapping = 1002;
+const constants_NearestFilter = 1003;
+const constants_NearestMipmapNearestFilter = 1004;
+const constants_NearestMipMapNearestFilter = 1004;
+const constants_NearestMipmapLinearFilter = 1005;
+const constants_NearestMipMapLinearFilter = 1005;
+const constants_LinearFilter = 1006;
+const constants_LinearMipmapNearestFilter = 1007;
+const constants_LinearMipMapNearestFilter = 1007;
+const constants_LinearMipmapLinearFilter = 1008;
+const constants_LinearMipMapLinearFilter = 1008;
+const constants_UnsignedByteType = 1009;
+const constants_ByteType = 1010;
+const constants_ShortType = 1011;
+const constants_UnsignedShortType = 1012;
+const constants_IntType = 1013;
+const constants_UnsignedIntType = 1014;
+const constants_FloatType = 1015;
+const constants_HalfFloatType = 1016;
+const constants_UnsignedShort4444Type = 1017;
+const constants_UnsignedShort5551Type = 1018;
+const constants_UnsignedShort565Type = 1019;
+const constants_UnsignedInt248Type = 1020;
+const constants_AlphaFormat = 1021;
+const constants_RGBFormat = 1022;
+const constants_RGBAFormat = 1023;
+const constants_LuminanceFormat = 1024;
+const constants_LuminanceAlphaFormat = 1025;
+const constants_RGBEFormat = (/* unused pure expression or super */ null && (constants_RGBAFormat));
+const constants_DepthFormat = 1026;
+const constants_DepthStencilFormat = 1027;
+const constants_RedFormat = 1028;
+const constants_RedIntegerFormat = 1029;
+const constants_RGFormat = 1030;
+const constants_RGIntegerFormat = 1031;
+const constants_RGBIntegerFormat = 1032;
+const constants_RGBAIntegerFormat = 1033;
+
+const constants_RGB_S3TC_DXT1_Format = 33776;
+const constants_RGBA_S3TC_DXT1_Format = 33777;
+const constants_RGBA_S3TC_DXT3_Format = 33778;
+const constants_RGBA_S3TC_DXT5_Format = 33779;
+const constants_RGB_PVRTC_4BPPV1_Format = 35840;
+const constants_RGB_PVRTC_2BPPV1_Format = 35841;
+const constants_RGBA_PVRTC_4BPPV1_Format = 35842;
+const constants_RGBA_PVRTC_2BPPV1_Format = 35843;
+const constants_RGB_ETC1_Format = 36196;
+const constants_RGB_ETC2_Format = 37492;
+const constants_RGBA_ETC2_EAC_Format = 37496;
+const constants_RGBA_ASTC_4x4_Format = 37808;
+const constants_RGBA_ASTC_5x4_Format = 37809;
+const constants_RGBA_ASTC_5x5_Format = 37810;
+const constants_RGBA_ASTC_6x5_Format = 37811;
+const constants_RGBA_ASTC_6x6_Format = 37812;
+const constants_RGBA_ASTC_8x5_Format = 37813;
+const constants_RGBA_ASTC_8x6_Format = 37814;
+const constants_RGBA_ASTC_8x8_Format = 37815;
+const constants_RGBA_ASTC_10x5_Format = 37816;
+const constants_RGBA_ASTC_10x6_Format = 37817;
+const constants_RGBA_ASTC_10x8_Format = 37818;
+const constants_RGBA_ASTC_10x10_Format = 37819;
+const constants_RGBA_ASTC_12x10_Format = 37820;
+const constants_RGBA_ASTC_12x12_Format = 37821;
+const constants_RGBA_BPTC_Format = 36492;
+const constants_SRGB8_ALPHA8_ASTC_4x4_Format = 37840;
+const constants_SRGB8_ALPHA8_ASTC_5x4_Format = 37841;
+const constants_SRGB8_ALPHA8_ASTC_5x5_Format = 37842;
+const constants_SRGB8_ALPHA8_ASTC_6x5_Format = 37843;
+const constants_SRGB8_ALPHA8_ASTC_6x6_Format = 37844;
+const constants_SRGB8_ALPHA8_ASTC_8x5_Format = 37845;
+const constants_SRGB8_ALPHA8_ASTC_8x6_Format = 37846;
+const constants_SRGB8_ALPHA8_ASTC_8x8_Format = 37847;
+const constants_SRGB8_ALPHA8_ASTC_10x5_Format = 37848;
+const constants_SRGB8_ALPHA8_ASTC_10x6_Format = 37849;
+const constants_SRGB8_ALPHA8_ASTC_10x8_Format = 37850;
+const constants_SRGB8_ALPHA8_ASTC_10x10_Format = 37851;
+const constants_SRGB8_ALPHA8_ASTC_12x10_Format = 37852;
+const constants_SRGB8_ALPHA8_ASTC_12x12_Format = 37853;
+const constants_LoopOnce = 2200;
+const constants_LoopRepeat = 2201;
+const constants_LoopPingPong = 2202;
+const constants_InterpolateDiscrete = 2300;
+const constants_InterpolateLinear = 2301;
+const constants_InterpolateSmooth = 2302;
+const constants_ZeroCurvatureEnding = 2400;
+const constants_ZeroSlopeEnding = 2401;
+const constants_WrapAroundEnding = 2402;
+const constants_NormalAnimationBlendMode = 2500;
+const constants_AdditiveAnimationBlendMode = 2501;
+const constants_TrianglesDrawMode = 0;
+const constants_TriangleStripDrawMode = 1;
+const constants_TriangleFanDrawMode = 2;
+const constants_LinearEncoding = 3000;
+const constants_sRGBEncoding = 3001;
+const constants_GammaEncoding = 3007;
+const constants_RGBEEncoding = 3002;
+const constants_LogLuvEncoding = 3003;
+const constants_RGBM7Encoding = 3004;
+const constants_RGBM16Encoding = 3005;
+const constants_RGBDEncoding = 3006;
+const constants_BasicDepthPacking = 3200;
+const constants_RGBADepthPacking = 3201;
+const constants_TangentSpaceNormalMap = 0;
+const constants_ObjectSpaceNormalMap = 1;
+
+const constants_ZeroStencilOp = 0;
+const constants_KeepStencilOp = 7680;
+const constants_ReplaceStencilOp = 7681;
+const constants_IncrementStencilOp = 7682;
+const constants_DecrementStencilOp = 7683;
+const constants_IncrementWrapStencilOp = 34055;
+const constants_DecrementWrapStencilOp = 34056;
+const constants_InvertStencilOp = 5386;
+
+const constants_NeverStencilFunc = 512;
+const constants_LessStencilFunc = 513;
+const constants_EqualStencilFunc = 514;
+const constants_LessEqualStencilFunc = 515;
+const constants_GreaterStencilFunc = 516;
+const constants_NotEqualStencilFunc = 517;
+const constants_GreaterEqualStencilFunc = 518;
+const constants_AlwaysStencilFunc = 519;
+
+const constants_StaticDrawUsage = 35044;
+const constants_DynamicDrawUsage = 35048;
+const constants_StreamDrawUsage = 35040;
+const constants_StaticReadUsage = 35045;
+const constants_DynamicReadUsage = 35049;
+const constants_StreamReadUsage = 35041;
+const constants_StaticCopyUsage = 35046;
+const constants_DynamicCopyUsage = 35050;
+const constants_StreamCopyUsage = 35042;
+
+const constants_GLSL1 = '100';
+const constants_GLSL3 = '300 es';
+
 ;// CONCATENATED MODULE: ./source/three-video-player.js
 // Import JS libraries
 
 
 // Import play button alpha image
+
+
 
 
 // Create private member refrence to object
@@ -49294,13 +49498,16 @@ async function _setState(nState) {
            _this.geometry.dispose();
            _this.geometry = three_video_player_geometry;
            _this.material.transparent = true;
-           _this.material.map = new VideoTexture(_videoDOMElement);
-           _this.material.alphaMap = new VideoTexture(_maskVideoDOMElement);
+           _this.material.map = new VideoTexture(_videoDOMElement, constants_NearestFilter, constants_RGBAFormat);
+           _this.material.alphaMap = new VideoTexture(_maskVideoDOMElement, constants_NearestFilter, constants_RGBAFormat);
            _this.material.map.needsUpdate = true;
             _this.material.alphaMap.needsUpdate = true;
             _this.material.precision = "lowp";
             _this.material.forceSinglePass = false;
            _this.material.needsUpdate = true;
+           _this.material.magFilter = NearestFilter;
+           _this.material.minFilter = NearestFilter;
+           _material.format = constants_RGBAFormat;
            _this.visible = true;
            _playButtonObject.visible = true;
             break;
@@ -49468,11 +49675,6 @@ renderer3.domElement.addEventListener('mousedown', function(event){
     }
 });
 
-// Create animation direction variable & set animation constants
-var dir = "right";
-const RotationSpeed = 0.002;
-const RotationMax = 0.4;
-var xrReferenceSpace;
 //'hit-test'
 navigator.xr.requestSession('immersive-ar', { optionalFeatures: ['local-floor'] }).then((session) => {
 // navigator.xr.requestSession('immersive-vr', { optionalFeatures: ['local-floor'] }).then((session) => {
