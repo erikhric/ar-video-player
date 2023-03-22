@@ -49499,7 +49499,7 @@ async function _setState(nState) {
            _this.geometry = three_video_player_geometry;
            _this.material.transparent = true;
            _this.material.map = new VideoTexture(_videoDOMElement, constants_NearestFilter, constants_RGBAFormat);
-           // _this.material.alphaMap = new THREE.VideoTexture(_maskVideoDOMElement, NearestFilter, RGBAFormat);
+           _this.material.alphaMap = new VideoTexture(_maskVideoDOMElement, constants_NearestFilter, constants_RGBAFormat);
            _this.material.map.needsUpdate = true;
            _this.material.alphaMap.needsUpdate = true;
            _this.material.precision = "lowp";
@@ -49611,10 +49611,12 @@ THREEVideoPlayer.prototype = Object.assign(Object.create(Mesh.prototype), {
 const scene3 = new Scene();
 
 // Create THREE JS camera
-const camera3 = new PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+const camera3 = new PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 100);
+camera3.matrixWorldAutoUpdate = true;
 // camera3.position.z = -1;
 // Create & initialize THREE JS renderer
 const renderer3 = new WebGLRenderer( { alpha: true, precision: "lowp", powerPreference: "high-performance" } );
+renderer3.setPixelRatio(2);
 renderer3.setSize(window.innerWidth, window.innerHeight);
 renderer3.xr.enabled = true;
 renderer3.debug.checkShaderErrors = false;
@@ -49694,10 +49696,11 @@ navigator.xr.requestSession('immersive-ar', { optionalFeatures: ['local-floor'] 
     });
 });
 
+
 // Define animation & rendering method
 function animate() {
     // Request next frame
-    camera3.updateMatrixWorld();
+    // camera3.updateMatrixWorld();
 
     // Render frame
     renderer3.render(scene3, camera3);
