@@ -49499,7 +49499,7 @@ async function _setState(nState) {
            _this.geometry = three_video_player_geometry;
            _this.material.transparent = true;
            _this.material.map = new VideoTexture(_videoDOMElement, constants_NearestFilter, constants_RGBAFormat);
-           _this.material.alphaMap = new VideoTexture(_maskVideoDOMElement, constants_NearestFilter, constants_RGBAFormat);
+           // _this.material.alphaMap = new THREE.VideoTexture(_maskVideoDOMElement, NearestFilter, RGBAFormat);
            _this.material.map.needsUpdate = true;
            _this.material.alphaMap.needsUpdate = true;
            _this.material.precision = "lowp";
