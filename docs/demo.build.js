@@ -106,7 +106,7 @@ const CubeUVRefractionMapping = 307;
 const RepeatWrapping = 1000;
 const ClampToEdgeWrapping = 1001;
 const MirroredRepeatWrapping = 1002;
-const NearestFilter = 1003;
+const three_module_NearestFilter = 1003;
 const NearestMipmapNearestFilter = 1004;
 const NearestMipMapNearestFilter = 1004;
 const NearestMipmapLinearFilter = 1005;
@@ -130,10 +130,10 @@ const UnsignedShort565Type = 1019;
 const UnsignedInt248Type = 1020;
 const AlphaFormat = 1021;
 const RGBFormat = 1022;
-const RGBAFormat = 1023;
+const three_module_RGBAFormat = 1023;
 const LuminanceFormat = 1024;
 const LuminanceAlphaFormat = 1025;
-const RGBEFormat = (/* unused pure expression or super */ null && (RGBAFormat));
+const RGBEFormat = (/* unused pure expression or super */ null && (three_module_RGBAFormat));
 const DepthFormat = 1026;
 const DepthStencilFormat = 1027;
 const RedFormat = 1028;
@@ -1433,7 +1433,7 @@ const ImageUtils = {
 
 let textureId = 0;
 
-function Texture( image = Texture.DEFAULT_IMAGE, mapping = Texture.DEFAULT_MAPPING, wrapS = ClampToEdgeWrapping, wrapT = ClampToEdgeWrapping, magFilter = LinearFilter, minFilter = LinearMipmapLinearFilter, format = RGBAFormat, type = UnsignedByteType, anisotropy = 1, encoding = LinearEncoding ) {
+function Texture( image = Texture.DEFAULT_IMAGE, mapping = Texture.DEFAULT_MAPPING, wrapS = ClampToEdgeWrapping, wrapT = ClampToEdgeWrapping, magFilter = LinearFilter, minFilter = LinearMipmapLinearFilter, format = three_module_RGBAFormat, type = UnsignedByteType, anisotropy = 1, encoding = LinearEncoding ) {
 
 	Object.defineProperty( this, 'id', { value: textureId ++ } );
 
@@ -12033,7 +12033,7 @@ class WebGLCubeRenderTarget extends WebGLRenderTarget {
 	fromEquirectangularTexture( renderer, texture ) {
 
 		this.texture.type = texture.type;
-		this.texture.format = RGBAFormat; // see #18859
+		this.texture.format = three_module_RGBAFormat; // see #18859
 		this.texture.encoding = texture.encoding;
 
 		this.texture.generateMipmaps = texture.generateMipmaps;
@@ -12145,8 +12145,8 @@ function DataTexture( data, width, height, format, type, mapping, wrapS, wrapT, 
 
 	this.image = { data: data || null, width: width || 1, height: height || 1 };
 
-	this.magFilter = magFilter !== undefined ? magFilter : NearestFilter;
-	this.minFilter = minFilter !== undefined ? minFilter : NearestFilter;
+	this.magFilter = magFilter !== undefined ? magFilter : three_module_NearestFilter;
+	this.minFilter = minFilter !== undefined ? minFilter : three_module_NearestFilter;
 
 	this.generateMipmaps = false;
 	this.flipY = false;
@@ -15436,8 +15436,8 @@ function DataTexture2DArray( data = null, width = 1, height = 1, depth = 1 ) {
 
 	this.image = { data, width, height, depth };
 
-	this.magFilter = NearestFilter;
-	this.minFilter = NearestFilter;
+	this.magFilter = three_module_NearestFilter;
+	this.minFilter = three_module_NearestFilter;
 
 	this.wrapR = ClampToEdgeWrapping;
 
@@ -15466,8 +15466,8 @@ function DataTexture3D( data = null, width = 1, height = 1, depth = 1 ) {
 
 	this.image = { data, width, height, depth };
 
-	this.magFilter = NearestFilter;
-	this.minFilter = NearestFilter;
+	this.magFilter = three_module_NearestFilter;
+	this.minFilter = three_module_NearestFilter;
 
 	this.wrapR = ClampToEdgeWrapping;
 
@@ -18807,7 +18807,7 @@ function WebGLShadowMap( _renderer, _objects, maxTextureSize ) {
 
 			if ( shadow.map === null && ! shadow.isPointLightShadow && this.type === VSMShadowMap ) {
 
-				const pars = { minFilter: LinearFilter, magFilter: LinearFilter, format: RGBAFormat };
+				const pars = { minFilter: LinearFilter, magFilter: LinearFilter, format: three_module_RGBAFormat };
 
 				shadow.map = new WebGLRenderTarget( _shadowMapSize.x, _shadowMapSize.y, pars );
 				shadow.map.texture.name = light.name + '.shadowMap';
@@ -18820,7 +18820,7 @@ function WebGLShadowMap( _renderer, _objects, maxTextureSize ) {
 
 			if ( shadow.map === null ) {
 
-				const pars = { minFilter: NearestFilter, magFilter: NearestFilter, format: RGBAFormat };
+				const pars = { minFilter: three_module_NearestFilter, magFilter: three_module_NearestFilter, format: three_module_RGBAFormat };
 
 				shadow.map = new WebGLRenderTarget( _shadowMapSize.x, _shadowMapSize.y, pars );
 				shadow.map.texture.name = light.name + '.shadowMap';
@@ -20173,14 +20173,14 @@ function WebGLTextures( _gl, extensions, state, properties, capabilities, utils,
 		if ( isWebGL2 ) return false;
 
 		return ( texture.wrapS !== ClampToEdgeWrapping || texture.wrapT !== ClampToEdgeWrapping ) ||
-			( texture.minFilter !== NearestFilter && texture.minFilter !== LinearFilter );
+			( texture.minFilter !== three_module_NearestFilter && texture.minFilter !== LinearFilter );
 
 	}
 
 	function textureNeedsGenerateMipmaps( texture, supportsMips ) {
 
 		return texture.generateMipmaps && supportsMips &&
-			texture.minFilter !== NearestFilter && texture.minFilter !== LinearFilter;
+			texture.minFilter !== three_module_NearestFilter && texture.minFilter !== LinearFilter;
 
 	}
 
@@ -20248,7 +20248,7 @@ function WebGLTextures( _gl, extensions, state, properties, capabilities, utils,
 
 	function filterFallback( f ) {
 
-		if ( f === NearestFilter || f === NearestMipmapNearestFilter || f === NearestMipmapLinearFilter ) {
+		if ( f === three_module_NearestFilter || f === NearestMipmapNearestFilter || f === NearestMipmapLinearFilter ) {
 
 			return 9728;
 
@@ -20462,7 +20462,7 @@ function WebGLTextures( _gl, extensions, state, properties, capabilities, utils,
 	};
 
 	const filterToGL = {
-		[ NearestFilter ]: 9728,
+		[ three_module_NearestFilter ]: 9728,
 		[ NearestMipmapNearestFilter ]: 9984,
 		[ NearestMipmapLinearFilter ]: 9986,
 
@@ -20507,7 +20507,7 @@ function WebGLTextures( _gl, extensions, state, properties, capabilities, utils,
 			_gl.texParameteri( textureType, 10240, filterFallback( texture.magFilter ) );
 			_gl.texParameteri( textureType, 10241, filterFallback( texture.minFilter ) );
 
-			if ( texture.minFilter !== NearestFilter && texture.minFilter !== LinearFilter ) {
+			if ( texture.minFilter !== three_module_NearestFilter && texture.minFilter !== LinearFilter ) {
 
 				console.warn( 'THREE.WebGLRenderer: Texture is not power of two. Texture.minFilter should be set to THREE.NearestFilter or THREE.LinearFilter.' );
 
@@ -20688,7 +20688,7 @@ function WebGLTextures( _gl, extensions, state, properties, capabilities, utils,
 
 				mipmap = mipmaps[ i ];
 
-				if ( texture.format !== RGBAFormat && texture.format !== RGBFormat ) {
+				if ( texture.format !== three_module_RGBAFormat && texture.format !== RGBFormat ) {
 
 					if ( glFormat !== null ) {
 
@@ -20813,7 +20813,7 @@ function WebGLTextures( _gl, extensions, state, properties, capabilities, utils,
 
 					const mipmap = mipmaps[ j ];
 
-					if ( texture.format !== RGBAFormat && texture.format !== RGBFormat ) {
+					if ( texture.format !== three_module_RGBAFormat && texture.format !== RGBFormat ) {
 
 						if ( glFormat !== null ) {
 
@@ -21090,7 +21090,7 @@ function WebGLTextures( _gl, extensions, state, properties, capabilities, utils,
 
 		if ( isWebGL2 && renderTarget.texture.format === RGBFormat && ( renderTarget.texture.type === FloatType || renderTarget.texture.type === HalfFloatType ) ) {
 
-			renderTarget.texture.format = RGBAFormat;
+			renderTarget.texture.format = three_module_RGBAFormat;
 
 			console.warn( 'THREE.WebGLRenderer: Rendering to textures with RGB format is not supported. Using RGBA format instead.' );
 
@@ -21372,7 +21372,7 @@ function WebGLUtils( gl, extensions, capabilities ) {
 
 		if ( p === AlphaFormat ) return 6406;
 		if ( p === RGBFormat ) return 6407;
-		if ( p === RGBAFormat ) return 6408;
+		if ( p === three_module_RGBAFormat ) return 6408;
 		if ( p === LuminanceFormat ) return 6409;
 		if ( p === LuminanceAlphaFormat ) return 6410;
 		if ( p === DepthFormat ) return 6402;
@@ -24548,7 +24548,7 @@ function WebGLRenderer( parameters ) {
 						const boneMatrices = new Float32Array( size * size * 4 ); // 4 floats per RGBA pixel
 						boneMatrices.set( skeleton.boneMatrices ); // copy current values
 
-						const boneTexture = new DataTexture( boneMatrices, size, size, RGBAFormat, FloatType );
+						const boneTexture = new DataTexture( boneMatrices, size, size, three_module_RGBAFormat, FloatType );
 
 						skeleton.boneMatrices = boneMatrices;
 						skeleton.boneTexture = boneTexture;
@@ -24798,7 +24798,7 @@ function WebGLRenderer( parameters ) {
 				const textureFormat = texture.format;
 				const textureType = texture.type;
 
-				if ( textureFormat !== RGBAFormat && utils.convert( textureFormat ) !== _gl.getParameter( 35739 ) ) {
+				if ( textureFormat !== three_module_RGBAFormat && utils.convert( textureFormat ) !== _gl.getParameter( 35739 ) ) {
 
 					console.error( 'THREE.WebGLRenderer.readRenderTargetPixels: renderTarget is not in RGBA or implementation defined format.' );
 					return;
@@ -27132,8 +27132,8 @@ function DepthTexture( width, height, type, mapping, wrapS, wrapT, magFilter, mi
 
 	this.image = { width: width, height: height };
 
-	this.magFilter = magFilter !== undefined ? magFilter : NearestFilter;
-	this.minFilter = minFilter !== undefined ? minFilter : NearestFilter;
+	this.magFilter = magFilter !== undefined ? magFilter : three_module_NearestFilter;
+	this.minFilter = minFilter !== undefined ? minFilter : three_module_NearestFilter;
 
 	this.flipY = false;
 	this.generateMipmaps = false;
@@ -34935,7 +34935,7 @@ TextureLoader.prototype = Object.assign( Object.create( Loader.prototype ), {
 			// JPEGs can't have an alpha channel, so memory can be saved by storing them as RGB.
 			const isJPEG = url.search( /\.jpe?g($|\?)/i ) > 0 || url.search( /^data\:image\/jpeg/ ) === 0;
 
-			texture.format = isJPEG ? RGBFormat : RGBAFormat;
+			texture.format = isJPEG ? RGBFormat : three_module_RGBAFormat;
 			texture.needsUpdate = true;
 
 			if ( onLoad !== undefined ) {
@@ -39650,7 +39650,7 @@ const TEXTURE_WRAPPING = {
 };
 
 const TEXTURE_FILTER = {
-	NearestFilter: NearestFilter,
+	NearestFilter: three_module_NearestFilter,
 	NearestMipmapNearestFilter: NearestMipmapNearestFilter,
 	NearestMipmapLinearFilter: NearestMipmapLinearFilter,
 	LinearFilter: LinearFilter,
@@ -46210,8 +46210,8 @@ class PMREMGenerator {
 	_allocateTargets( texture ) { // warning: null texture is valid
 
 		const params = {
-			magFilter: NearestFilter,
-			minFilter: NearestFilter,
+			magFilter: three_module_NearestFilter,
+			minFilter: three_module_NearestFilter,
 			generateMipmaps: false,
 			type: UnsignedByteType,
 			format: RGBEFormat,
@@ -49388,6 +49388,16 @@ function THREEVideoPlayer(options = {}) {
    });
 }
 
+// this improves performance of video texture
+function createVideoTexture(video) {
+    const texture = new THREE.Texture(video);
+    texture.minFilter = NearestFilter;
+    texture.magFilter = NearestFilter;
+    texture.format = RGBAFormat;
+    texture.generateMipmaps = false;
+    return texture;
+}
+
 // Define private _setSource method
 function _setSource(source) {
     // Return if uninitialized
@@ -49501,12 +49511,14 @@ async function _setState(nState) {
            _this.material.map = new VideoTexture(_videoDOMElement, constants_NearestFilter, constants_RGBAFormat);
            _this.material.alphaMap = new VideoTexture(_maskVideoDOMElement, constants_NearestFilter, constants_RGBAFormat);
            _this.material.map.needsUpdate = true;
+           _this.material.map.generateMipmaps = false;
+           _this.material.alphaMap.generateMipmaps = false;
            _this.material.alphaMap.needsUpdate = true;
            _this.material.precision = "lowp";
            _this.material.forceSinglePass = false;
            _this.material.needsUpdate = true;
-           _this.material.magFilter = NearestFilter;
-           _this.material.minFilter = NearestFilter;
+           _this.material.magFilter = three_module_NearestFilter;
+           _this.material.minFilter = three_module_NearestFilter;
            _material.format = constants_RGBAFormat;
            _this.visible = true;
            _playButtonObject.visible = true;
@@ -49678,8 +49690,8 @@ renderer3.domElement.addEventListener('mousedown', function(event){
 });
 
 //'hit-test'
-navigator.xr.requestSession('immersive-ar', { optionalFeatures: ['local-floor'] }).then((session) => {
-// navigator.xr.requestSession('immersive-vr', { optionalFeatures: ['local-floor'] }).then((session) => {
+// navigator.xr.requestSession('immersive-ar', { optionalFeatures: ['local-floor'] }).then((session) => {
+navigator.xr.requestSession('immersive-vr', { optionalFeatures: ['local-floor'] }).then((session) => {
     renderer3.xr.setSession(session);
     session.updateRenderState({
         depthNear: 1.0,
