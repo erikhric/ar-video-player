@@ -141,7 +141,7 @@ function init() {
     // let nftName = "ramen-1000px";
     let nftName = "pattern-cherry_peak_finals-07";
     //let nftUrl  = "../resources/nft/" + nftName; // for local test
-    let nftUrl  = "/ar-video-player/resources/nft/" + nftName // nftName;//"https://followthedarkside.github.io/arjs-image-tracking-sample/resources/nft/" + nftName;
+    let nftUrl  = "https://erikhric.github.io/ar-video-player/resources/nft/" + nftName // nftName;//"https://followthedarkside.github.io/arjs-image-tracking-sample/resources/nft/" + nftName;
     //let nftUrl  = "https://arjs-cors-proxy.herokuapp.com/https://raw.githubusercontent.com/FollowTheDarkside/arjs-image-tracking-sample/resources/nft/" + nftName;
     //let nftUrl  = "https://arjs-cors-proxy.herokuapp.com/https://rawcdn.githack.com/FollowTheDarkside/arjs-image-tracking-sample/tree/master/resources/nft/" + nftName;
 
