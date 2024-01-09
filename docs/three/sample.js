@@ -139,7 +139,7 @@ function init() {
 
     // Set resource path
     // let nftName = "ramen-1000px";
-    let nftName = "pattern-cherry_peak_finals-07";
+    let nftName = "photo_2024-01-01 16.12.00"//"pattern-cherry_peak_finals-07";
     //let nftUrl  = "../resources/nft/" + nftName; // for local test
     let nftUrl  = "https://erikhric.github.io/ar-video-player/resources/nft/" + nftName // nftName;//"https://followthedarkside.github.io/arjs-image-tracking-sample/resources/nft/" + nftName;
     //let nftUrl  = "https://arjs-cors-proxy.herokuapp.com/https://raw.githubusercontent.com/FollowTheDarkside/arjs-image-tracking-sample/resources/nft/" + nftName;
@@ -166,11 +166,12 @@ function init() {
     const g = new THREE.BoxGeometry( 0.5, 0.5 ,0.5);
     const material = new THREE.MeshBasicMaterial({color: 0x00ff00});
     const cube = new THREE.Mesh( g, material );
-    const g2 = new THREE.BoxGeometry( 0.1, 0.1 ,0.1);
-    const material2 = new THREE.MeshBasicMaterial({color: 0x00ff00});
-    const cube2 = new THREE.Mesh( g, material );
-        // scene.add(cube);
-    let model = cube;
+    const g2 = new THREE.BoxGeometry( 0.7, 0.7 ,0.7);
+    const material2 = new THREE.MeshBasicMaterial({color: 0x0000ff});
+    const cube2 = new THREE.Mesh( g2, material2 );
+    scene.add(cube);
+    scene.add(cube2);
+    let model;
     // scene.add( model );
     const loader = new THREE.GLTFLoader();
     loader.load(
