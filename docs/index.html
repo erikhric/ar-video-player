@@ -55,6 +55,8 @@
         <div class="arjs-loader-spinner"></div>
     </div>
     <script>
+        let sourceW = 480
+        let sourceH = 640
         //////////////////////////////////////////////////////////////////////////////////
         //		Init
         //////////////////////////////////////////////////////////////////////////////////
@@ -98,8 +100,8 @@
 
         var arToolkitSource = new THREEx.ArToolkitSource({
             sourceType : 'webcam',
-            sourceWidth: 480,
-            sourceHeight: 640,
+            sourceWidth: sourceW,
+            sourceHeight: sourceH,
         })
 
         arToolkitSource.init(function onReady(){
@@ -133,14 +135,14 @@
 
         // create atToolkitContext
         var arToolkitContext = new THREEx.ArToolkitContext({
-            detectionMode: 'color_and_matrix',
-            canvasWidth: 480,
-            canvasHeight: 640,
+            detectionMode: 'mono_and_matrix',
+            canvasWidth: sourceW,
+            canvasHeight: sourceH,
             cameraParametersUrl: "https://erikhric.github.io/ar-video-player/resources/camera_para.dat",
             // debug: true,
         }, {
-            sourceWidth: 480,
-            sourceHeight: 640,
+            sourceWidth: sourceW,
+            sourceHeight: sourceH,
         })
 
         // initialize it
@@ -148,6 +150,7 @@
             // copy projection matrix to camera
             // camera.projectionMatrix.copy( arToolkitContext.getProjectionMatrix() );
             camera.far = 20000
+            camera.near = 0.001
         })
 
         ////////////////////////////////////////////////////////////////////////////////
@@ -180,7 +183,7 @@
         const g = new THREE.BoxGeometry( 500, 500 ,500);
         const material = new THREE.MeshBasicMaterial({color: 0x00ff00});
         const cube = new THREE.Mesh( g, material );
-        const g2 = new THREE.PlaneGeometry( 1700 ,1700);
+        const g2 = new THREE.PlaneGeometry( 700 ,700);
         
         // const material2 = new THREE.MeshBasicMaterial({color: 0x0000ff, side: THREE.DoubleSide});
         const material2 = new THREE.MeshBasicMaterial({color: 0x0000ff});
@@ -189,7 +192,9 @@
         // root.add(cube);
         root.add(cube2);
         cube.position.z = -100;
-        cube2.position.z = -100;
+        cube2.position.z = -300;
+        cube2.position.x = -100;
+        cube2.position.y = -100;
         cube2.rotation.x = Math.PI / 180 * -90
 
         var threeGLTFLoader = new THREE.GLTFLoader();
