@@ -171,12 +171,31 @@
         //		add an object in the scene
         //////////////////////////////////////////////////////////////////////////////////
 
+        let texture = new THREE.TextureLoader().load('../resources/Map-COL.jpg');
+        const g = new THREE.BoxGeometry( 0.5, 0.5 ,1.5);
+        const material = new THREE.MeshBasicMaterial({color: 0x00ff00});
+        const cube = new THREE.Mesh( g, material );
+        const g2 = new THREE.PlaneGeometry( 1.7 ,1.7);
+        const material2 = new THREE.MeshBasicMaterial({color: 0x0000ff, side: THREE.DoubleSide});
+        const cube2 = new THREE.Mesh( g2, material2 );
+        
+        root.add(cube);
+        root.add(cube2);
+        cube.position.z = -100;
+        cube2.position.z = -100;
+        
+
         var threeGLTFLoader = new THREE.GLTFLoader();
         var model;
 
         threeGLTFLoader.load("./resources/Flamingo.glb", function (gltf) {
             model = gltf.scene.children[0];
             model.name = 'Flamingo';
+
+            gltf.scene.traverse((child) => {
+                child.frustumCulled = false;
+            });
+
             const clips = gltf.animations;
 
             var animation = gltf.animations[0];
@@ -188,7 +207,7 @@
 
             root.matrixAutoUpdate = false;
             root.add(model);
-
+            
             model.position.z = -100;
             //model.position.z = 100;
 
