@@ -192,7 +192,7 @@ function init() {
                     child.material.map = texture;
                 }
             });
-            model = cube
+            // model = cube
             scene.add( model );
         },
         // called while loading is progressing
