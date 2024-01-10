@@ -136,11 +136,12 @@
         // create atToolkitContext
         var arToolkitContext = new THREEx.ArToolkitContext({
             detectionMode: 'mono_and_matrix',
-            canvasWidth: sourceW,
-            canvasHeight: sourceH,
+            // canvasWidth: sourceW,
+            // canvasHeight: sourceH,
             cameraParametersUrl: "https://erikhric.github.io/ar-video-player/resources/camera_para.dat",
             // debug: true,
         }, {
+            sourceType: "webcam",
             sourceWidth: sourceW,
             sourceHeight: sourceH,
         })
@@ -149,6 +150,7 @@
         arToolkitContext.init(function onCompleted(){
             // copy projection matrix to camera
             // camera.projectionMatrix.copy( arToolkitContext.getProjectionMatrix() );
+            console.log("toolkit loaded")
             camera.far = 20000
             camera.near = 0.001
         })
@@ -162,10 +164,17 @@
         //let nftUrl  = "../resources/nft/" + nftName; // for local test
         let nftUrl  = "https://erikhric.github.io/ar-video-player/resources/nft/" + nftName
         // init controls for camera
+        // var markerControls = new THREEx.ArMarkerControls(arToolkitContext, camera, {
+        //     type : 'pattern',
+        //     patternRatio: 0.67,
+        //     patternUrl: "https://erikhric.github.io/ar-video-player/resources/pattern/" + patternName,
+        //     // maxDetectionRate: 30,
+        //     // changeMatrixMode: 'cameraTransformMatrix',
+        // })
         var markerControls = new THREEx.ArMarkerControls(arToolkitContext, camera, {
-            type : 'pattern',
+            type : 'nft',
             size: 0.05,
-            patternUrl: "https://erikhric.github.io/ar-video-player/resources/pattern/" + patternName,
+            descriptorsUrl : nftUrl,//'data/dataNFT/pinball',
             maxDetectionRate: 30,
             minConfidence: 0.8,
             changeMatrixMode: 'cameraTransformMatrix',
@@ -174,18 +183,6 @@
             smoothThreshold: 500,
             smoothTolerance: 2
         })
-        // var markerControls = new THREEx.ArMarkerControls(arToolkitContext, camera, {
-        //     type : 'nft',
-        //     size: 0.05,
-        //     descriptorsUrl : nftUrl,//'data/dataNFT/pinball',
-        //     maxDetectionRate: 30,
-        //     minConfidence: 0.8,
-        //     changeMatrixMode: 'cameraTransformMatrix',
-        //     smooth: true,
-        //     smoothCount: 150,
-        //     smoothThreshold: 500,
-        //     smoothTolerance: 2
-        // })
         scene.visible = false
 
         var root = new THREE.Object3D();
@@ -244,7 +241,12 @@
               model.position.y = (msg.height / msg.dpi * 2.54 * 10)/2.0; //y axis?
               model.position.x = (msg.width / msg.dpi * 2.54 * 10)/2.0; //x axis?
             })
-
+            window.addEventListener('markerFound', function(nft) {
+              console.log(nft);
+              var msg = nft.detail;
+              model.position.y = (msg.height / msg.dpi * 2.54 * 10)/2.0; //y axis?
+              model.position.x = (msg.width / msg.dpi * 2.54 * 10)/2.0; //x axis?
+            })
 
             //////////////////////////////////////////////////////////////////////////////////
             //		render the whole thing on the page
