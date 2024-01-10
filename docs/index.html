@@ -156,10 +156,22 @@
         ////////////////////////////////////////////////////////////////////////////////
         //          Create a ArMarkerControls
         ////////////////////////////////////////////////////////////////////////////////
-        let nftName = "photo_2024-01-01 16.12.00"//"pattern-cherry_peak_finals-07";
+        // let nftName = "photo_2024-01-01 16.12.00"//"pattern-cherry_peak_finals-07";
+        let nftName = "1686717429737";
         //let nftUrl  = "../resources/nft/" + nftName; // for local test
         let nftUrl  = "https://erikhric.github.io/ar-video-player/resources/nft/" + nftName
         // init controls for camera
+        // var markerControls = new THREEx.ArMarkerControls(arToolkitContext, camera, {
+        //     type : 'nft',
+        //     descriptorsUrl : nftUrl,//'data/dataNFT/pinball',
+        //     maxDetectionRate: 30,
+        //     minConfidence: 0.8,
+        //     changeMatrixMode: 'cameraTransformMatrix',
+        //     smooth: true,
+        //     smoothCount: 150,
+        //     smoothThreshold: 500,
+        //     smoothTolerance: 2
+        // })
         var markerControls = new THREEx.ArMarkerControls(arToolkitContext, camera, {
             type : 'nft',
             descriptorsUrl : nftUrl,//'data/dataNFT/pinball',
